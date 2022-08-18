@@ -4,6 +4,7 @@ import {
   useStripe,
   useElements
 } from "@stripe/react-stripe-js";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -12,6 +13,8 @@ export default function CheckoutForm() {
   const [email, setEmail] = useState('');
   const stripe = useStripe();
   const elements = useElements();
+
+  let navigate = useNavigate()
 
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -65,14 +68,14 @@ export default function CheckoutForm() {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: window.location.origin + "callback",
+        return_url: window.location.origin + "/callback",
         receipt_email: email,
       },
-
     }
-
     ,);
 
+    navigate("/callback", { replace: true });
+    
     // This point will only be reached if there is an immediate error when
     // confirming the payment. Otherwise, your customer will be redirected to
     // your `return_url`. For some payment methods like iDEAL, your customer will
