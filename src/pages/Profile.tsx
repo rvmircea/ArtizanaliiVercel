@@ -72,6 +72,7 @@ const Profile = () => {
     // <section className="flex items-center justify-center py-20 md:py-40 mx-8">
     //     <p className="font-semibold text-xl"></p>
     // </section>
+    //Git ???
     <LoadingBar/>
   )
 
