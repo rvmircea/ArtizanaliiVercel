@@ -2,7 +2,7 @@ import axios from "axios";
 import { Basket } from "../interfaces/IProductList";
 
 export const orderApi = axios.create({
-    baseURL: "https://localhost:7121/api/order",
+    baseURL: "https://artizanaliiwebapp.azurewebsites.net/api/order",
 })
 
 export const getOrderByUser = async (userId: string | undefined) => {

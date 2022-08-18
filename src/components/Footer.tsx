@@ -6,7 +6,7 @@ const Footer = () => {
         <a href="https://github.com/rvmircea">
             <span className='underline hover:text-orange-600'>Github</span>
         </a>
-        <a href="https://localhost:7121/swagger/index.html">
+        <a href="https://artizanaliiwebapp.azurewebsites.netswagger/index.html">
             <span className='underline hover:text-orange-600'>Open API</span>
         </a>
     </footer>

@@ -3,7 +3,7 @@ import { Basket, BasketItem } from "../interfaces/IProductList";
 
 
 export const cartApi = axios.create({
-    baseURL: "https://localhost:7121/api/basket",
+    baseURL: "https://artizanaliiwebapp.azurewebsites.net/api/basket",
 })
 
 export const getCart = async (userSub:string | undefined):Promise<Basket | undefined> => {

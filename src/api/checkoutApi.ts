@@ -2,7 +2,7 @@ import axios from "axios";
 import { Basket } from "../interfaces/IProductList";
 
 export const cartApi = axios.create({
-    baseURL: "https://localhost:7121/create-payment-intent",
+    baseURL: "https://artizanaliiwebapp.azurewebsites.net/create-payment-intent",
 })
 
 export const postPaymentIntent = async (basket: Basket | undefined, token:string | undefined) => {

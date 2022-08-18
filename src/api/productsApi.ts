@@ -2,7 +2,7 @@ import axios from "axios";
 import { Product } from "../interfaces/IProductList";
 
 export const productsApi = axios.create({
-    baseURL: "https://localhost:7121/api/product",
+    baseURL: "https://artizanaliiwebapp.azurewebsites.net/api/product",
 })
 
 export const getProducts = async () => {

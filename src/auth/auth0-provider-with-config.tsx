@@ -6,7 +6,7 @@ export const Auth0ProviderWithConfig = ({ children }: PropsWithChildren<Auth0Pro
     const domain = "dev-4qy3uxvn.us.auth0.com";
     const clientId = "noeQ4QqHhOc9jOd7TUrPOAoN27tz5JXU";
     const redirectUri = window.location.origin;
-    const audience = "https://localhost:7121";
+    const audience = "https://artizanaliiwebapp.azurewebsites.net";
     console.log(domain, audience, clientId, redirectUri);
     if (!(domain && clientId && redirectUri && audience)) {
         return null;
