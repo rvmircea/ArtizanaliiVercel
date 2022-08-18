@@ -68,7 +68,7 @@ export default function CheckoutForm() {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: window.location.origin + "/callback",
+        return_url: window.location.origin ,
         receipt_email: email,
       },
     }
