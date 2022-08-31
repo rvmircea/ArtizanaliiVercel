@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom'
 import { LoginButton } from './LoginButton'
 import { LogoutButton } from './LogoutButton'
 import { RegisterButton } from './RegisterButton'
+import CartBadge from './CartBadge';
 
 const unactiveStyle = "lg:mx-6 hover:text-orange-600 mx-2"
 const activeStyle = "lg:mx-6 hover:text-orange-600 mx-2 text-orange-700 transition transition-color duration-150 border-b-2 border-b-orange-600"
@@ -54,15 +55,19 @@ const Navbar = () => {
           <>
             <NavLink to="/cart" className={({ isActive }) =>
               isActive ? activeStyle : unactiveStyle}>
-              Coș</NavLink>
-              <div className='mt-1 flex bg-zinc-100 rounded-md shadow-md border border-zinc-200'>
-            <NavLink to="/profile" className="mx-4 hover:text-orange-600">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 pt-[0.15rem]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              <CartBadge />
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 pt-[0.15rem] mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
               </svg>
             </NavLink>
-            <LogoutButton style='hover:text-orange-600 mx-1 px-3' />
-              </div>
+            <div className='mt-1 flex bg-zinc-100 rounded-md shadow-md border border-zinc-200'>
+              <NavLink to="/profile" className="mx-4 hover:text-orange-600">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 pt-[0.15rem]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+              </NavLink>
+              <LogoutButton style='hover:text-orange-600 mx-1 px-3' />
+            </div>
           </>
         )}
       </div>

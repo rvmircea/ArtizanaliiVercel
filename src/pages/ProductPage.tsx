@@ -7,9 +7,12 @@ import { Product } from '../interfaces/IProductList';
 import { Disclosure, Transition } from '@headlessui/react';
 import BackButton from '../components/BackButton';
 import { useAuth0 } from '@auth0/auth0-react';
-import { addToCart } from '../api/cartApi';
+import { addToCart, getCart } from '../api/cartApi';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
+import { LoginButton } from '../components/LoginButton';
+import { RegisterButton } from '../components/RegisterButton';
+
 
 const ProductPage = () => {
 
@@ -21,13 +24,16 @@ const ProductPage = () => {
         pauseOnHover: false,
         draggable: true,
         progress: undefined,
-        });
+    });
 
     const param = useParams();
 
     const { user, isAuthenticated } = useAuth0();
 
     const { data, isLoading, isError, error } = useQuery<Product>('singleProduct', () => getSingleProduct(+param.productId!));
+
+    const { refetch } = useQuery(["GetCartUser", user], async () => await getCart(user?.sub), { enabled: false });
+
 
     if (isLoading) {
         return <LoadingBar />
@@ -41,9 +47,10 @@ const ProductPage = () => {
     }
 
     const addToCartButton = async () => {
-        const response = await addToCart(user?.sub, {userId: user?.sub, quantity: 1, productId: data?.id, product: data})
+        const response = await addToCart(user?.sub, { userId: user?.sub, quantity: 1, productId: data?.id, product: data })
         // const response = true;   
         if (response) {
+            refetch();
             notify();
         }
     }
@@ -54,7 +61,7 @@ const ProductPage = () => {
                 <BackButton />
                 <div className='flex justify-center align-middle max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8'>
                     <article className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
-                        <div className='rounded-md border border-t-zinc-200 shadow-md'> 
+                        <div className='rounded-md border border-t-zinc-200 shadow-md'>
                             <img src={data?.imgUrl} alt={"Imagine produs"} className="rounded-sm" />
                         </div>
                         <div className='bg-white flex justify-start flex-col align-middle space-y-6 p-2 border-2 border-t-zinc-200 shadow-md rounded-sm'>
@@ -112,26 +119,42 @@ const ProductPage = () => {
                                     </button>
                                 </>
                             ) : (
-                                <p className='text-lg font-bold mx-2'>Va rugam autentificati-va pentru a putea aduga produse in coș.</p>
+                                <>
+                                    <p className='md:text-lg text-sm font-bold mx-2'>Va rugam autentificati-va pentru a putea aduga produse in coș.</p>
+                                    <div className='flex space-x-8 justify-center'>
+                                        <div className='flex flex-col'>
+                                            <p className='md:text-lg text-sm font-semibold'>Logare in cont </p>
+                                            <LoginButton style='p-1 text-sm md:p-2 md:text-md text-white bg-orange-700 hover:bg-orange-600 transition-color duration-100 rounded-md' />
+                                        </div>
+
+                                        <div className='flex flex-col'>
+                                            <p className='md:text-lg text-sm font-semibold'>Creare cont nou</p>
+                                            <RegisterButton style='p-1 text-sm  md:p-2 md:text-md text-white bg-orange-700 hover:bg-orange-600 transition-color duration-100 rounded-md' />
+                                        </div>
+
+                                    </div>
+                                </>
+
+
                             )}
 
                         </div>
                         <ToastContainer
-                        toastStyle={{color: "white", backgroundColor:"#ea580c"}}
-                        theme="colored"
-                    position="bottom-right"
-                    autoClose={5000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover
-                />
+                            toastStyle={{ color: "white", backgroundColor: "#ea580c" }}
+                            theme="colored"
+                            position="bottom-right"
+                            autoClose={5000}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable
+                            pauseOnHover
+                        />
                     </article>
                 </div>
-               
+
             </section>
         </div>
     )
